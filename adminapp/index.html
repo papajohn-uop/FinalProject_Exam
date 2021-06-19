@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- A pretty basic html frontend--> 
+<!-- Using leaflet.js for mapping (https://leafletjs.com/)--> 
+<!-- Tabs taken from https://www.w3schools.com/howto/howto_js_tabs.asp--> 
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<link rel="stylesheet" href="https://rawgit.com/aratcliffe/Leaflet.contextmenu/master/dist/leaflet.contextmenu.css"> 
+<script src="https://rawgit.com/aratcliffe/Leaflet.contextmenu/master/dist/leaflet.contextmenu.js"></script> 
+
+
+<link href="./css/fp.css" rel="stylesheet" >
+</head> ()
+
+<script src="./js/admin_fp.js"></script>
+
+<body>
+<h2>ADMINISTRATOR</h2>
+<p>ADMINISTRATOR VIEW OF THE 5G DEVICES</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="handleTab(event, 'gNodeB')">gNodeB</button>
+  <button class="tablinks" onclick="handleTab(event, 'Cores5G')">Cores5G</button>
+  <button class="tablinks" onclick="handleTab(event, 'allDevices')">allDevices</button>
+</div>
+
+<div id="gNodeB" class="tabcontent" >
+</div>
+
+<div id="Cores5G" class="tabcontent"  >
+</div>
+
+<div id="allDevices" class="tabcontent">
+</div>
+
+
+</body>
+</html> 

@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  mysql_cont:
+    image: mysql:5.7.29
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: final_project_solution
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql_cont
+    environment:
+      PMA_HOST: mysql_cont
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8183:80
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    image: final_project
+    ports:
+      - "3000:3000"
+    volumes: 
+      - ./app:/app
+      - /app/node_modules
+    depends_on:
+      - mysql_cont
+    stdin_open: true
+    tty: true   
+
+  client:
+      image: nginx
+      ports:
+          - 46000:80
+      volumes:
+          - ./clientapp:/usr/share/nginx/html
+      depends_on:
+        - mysql_cont
+
+  admin:
+      image: nginx
+      ports:
+          - 47000:80
+      volumes:
+          - ./adminapp:/usr/share/nginx/html
+      depends_on:
+        - mysql_cont
+   
+  heat:
+      image: nginx
+      ports:
+          - 48000:80
+      volumes:
+          - ./heatMap:/usr/share/nginx/html   
+volumes:
+  dbdata:
